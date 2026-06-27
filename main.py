@@ -124,12 +124,7 @@ def webhook():
 @bot.message_handler(commands=['start'])
 def start_command(message):
     user_id = message.from_user.id
-    if not is_user_in_channel(user_id):
-        markup = InlineKeyboardMarkup()
-        for channel in REQUIRED_CHANNELS:
-            markup.add(InlineKeyboardButton(f"🔗 Join {channel}", url=f"https://t.me/{channel.strip('@')}") )
-        bot.reply_to(message, "📢 Channel Membership Required\nTo use this bot, you must join all our channels first", reply_markup=markup, parse_mode="Markdown")
-        return
+    
     if user_id not in like_tracker:
         like_tracker[user_id] = {"used": 0, "last_used": datetime.now() - timedelta(days=1)}
     bot.reply_to(message, "✅ You're verified! Use /like to send likes.", parse_mode="Markdown")
