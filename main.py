@@ -148,12 +148,7 @@ def handle_like(message):
         bot.reply_to(message, "❌ Sorry! command is not allowed here.\n\nJoin our official group:", reply_markup=markup)
         return
 
-    if not is_user_in_channel(user_id):
-        markup = InlineKeyboardMarkup()
-        for channel in REQUIRED_CHANNELS:
-            markup.add(InlineKeyboardButton(f"🔗 Join {channel}", url=f"https://t.me/{channel.strip('@')}") )
-        bot.reply_to(message, "❌ You must join all our channels to use this command.", reply_markup=markup, parse_mode="Markdown")
-        return
+    
 
     if len(args) != 3:
         bot.reply_to(message, "❌ Format: `/like server_name uid`", parse_mode="Markdown")
